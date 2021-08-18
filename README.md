@@ -1,7 +1,7 @@
-This node.js script writes .env files or export commands to stdout based on values held in AWS Parameter Store and/or AWS Secrets Manager. Node applications can then be run using environment variables set by it, perhaps using package "dotenv" to retrieve from the .env file.
+This node.js script writes .env files or export commands to stdout based on values held in Amazon Web Services (AWS) Parameter Store and/or AWS Secrets Manager. Node applications can then be run using environment variables set by it, perhaps using package "dotenv" to retrieve from the .env file.
 
-* Specify ssmpath and/or secretid to retrieve from AWS Parameter Store and/or AWS Secrets Manager respectively.
-* You can specify --accessKeyId=[awsAccessKeyId] and --secretAccessKey=[awsSecretAccessKey]; otherwise default AWS auth is used.
+* Specify `--ssmpath` and/or `--secretid` to retrieve from AWS Parameter Store and/or AWS Secrets Manager respectively.
+* You can specify `--accessKeyId=[awsAccessKeyId]` and `--secretAccessKey=[awsSecretAccessKey]`; otherwise default AWS auth is used.
 * For the Parameter Store, parameters are returned by path (e.g. parameters with names starting with an arbitrary path such as "/myapp/prodconfig")
 
 ## SAMPLE USAGE: 
@@ -58,6 +58,6 @@ export someObj="{\"thing\":1,\"thing2\":2}"
 All other options will be passed through to the AWS request. Useful options include:
 
   * --region : AWS region. Defaults to "eu-central-1"
-  * --endpoint : specify an endpoint url (e.g. endpoint="http://localstack:4566")
+  * --endpoint : specify an endpoint url (e.g. `--endpoint="http://localstack:4566"`)
   * --accessKeyId
   * --secretAccessKey
