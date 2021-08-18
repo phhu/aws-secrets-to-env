@@ -14,44 +14,12 @@ const {
   ...otherOptions
 } = minimist(process.argv.slice(2));
 
-if (help || (!secretid && !ssmpath)){console.error(`
-This node.js script writes .env files or export commands to stdout based on values held in AWS Parameter Store and/or AWS Secrets Manager. Node applications can then be run using environment variables set by it, perhaps using package "dotenv" to retrieve from the .env file.
-Specify ssmpath and/or secretid to retrieve from AWS Parameter Store and/or AWS Secrets Manager respectively.
-You can specify --accessKeyId=[awsAccessKeyId] and --secretAccessKey=[awsSecretAccessKey]; otherwise default AWS auth is used.
-
-SAMPLE USAGE: 
-node aws-secrets-to-env.js \
---ssmpath=/myapp/prodconfig \
---secretid=/myapp/prodconfig \
---region=eu-central-1 \
->.env && node myapp.js
-
-eval $(node aws-secrets-to-env.js \
---ssmpath=/myapp/prodconfig \
---secretid=/myapp/prodconfig \
---region=eu-central-1 \
---useexport \
-) && node myapp.js
-
-npx -y "@phhu/aws-secrets-to-env" \
---ssmpath=/myapp/prodconfig \
---region=eu-central-1 \
->.env && node myapp.js
-
-SCRIPT OPTIONS
-  --ssmpath: AWS Param Store Path to retrieve
-  --secretid: AWS Secrets Manager secret ID to retrieve. (This should return JSON key/value pairs)
-  --debug : write debugging info to stderr
-  --help : display this message
-  --useexport : include an "export" command at the start of each line  
-
-AWS OPTIONS: All other options will be passed through to the AWS request. Useful options include:
-  --region: AWS region. Defaults to "eu-central-1"
-  --endpoint: specify an endpoint url (e.g. http://localstack:4566)
-  --accessKeyId
-  --secretAccessKey
-`
-);process.exit();}
+if (help || (!secretid && !ssmpath)){
+  console.error(
+    require('fs').readFileSync("./README.md").toString()
+  )
+  process.exit()
+}
 
 // support funcs
 const debugLog = (...args) => {if (debug) console.error("*",...args)}

@@ -27,6 +27,7 @@ npx -y "@phhu/aws-secrets-to-env" \
 * For the Parameter Store, parameters are returned by path (e.g. parameters with names starting with an arbitrary path such as "/myapp/prodconfig")
 
 ## SCRIPT OPTIONS
+
   * --ssmpath : AWS Param Store Path to retrieve
   * --secretid : AWS Secrets Manager secret ID to retrieve. (This should return JSON key/value pairs)
   * --debug : write debugging info to stderr
