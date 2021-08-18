@@ -1,0 +1,29 @@
+{
+  "name": "aws-secrets-to-env",
+  "version": "0.0.1",
+  "description": "Node.js CLI script which writes .env files or export commands to stdout based on values held in AWS Parameter Store and/or AWS Secrets Manager",
+  "main": "awsSecretsToEnv.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phhu/aws-secrets-to-env.git"
+  },
+  "keywords": [
+    "AWS",
+    "SecretsManager",
+    "dotenv",
+    "env"
+  ],
+  "author": "phhu.git@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phhu/aws-secrets-to-env/issues"
+  },
+  "homepage": "https://github.com/phhu/aws-secrets-to-env#readme",
+  "dependencies": {
+    "aws-sdk": "^2.970.0",
+    "minimist": "^1.2.5"
+  }
+}
