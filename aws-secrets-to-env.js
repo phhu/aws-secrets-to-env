@@ -13,9 +13,8 @@ const {
   ...otherOptions
 } = minimist(process.argv.slice(2));
 
-if (help || (!secretid && !ssmpath)){console.error(
-`This node.js script writes .env files or export commands to stdout based on values held in AWS Parameter Store and/or AWS Secrets Manager. Node applications can then be run using environment variables set by it, perhaps using package "dotenv" to retrieve from the .env file.
-
+if (help || (!secretid && !ssmpath)){console.error(`
+This node.js script writes .env files or export commands to stdout based on values held in AWS Parameter Store and/or AWS Secrets Manager. Node applications can then be run using environment variables set by it, perhaps using package "dotenv" to retrieve from the .env file.
 Specify ssmpath and/or secretid to retrieve from AWS Parameter Store and/or AWS Secrets Manager respectively.
 You can specify --accessKeyId=[awsAccessKeyId] and --secretAccessKey=[awsSecretAccessKey]; otherwise default AWS auth is used.
 
@@ -40,7 +39,7 @@ SCRIPT OPTIONS
   --help : display this message
   --useexport : include an "export" command at the start of each line  
 
-AWS OPTIONS: Other options will be passed through to the AWS request. Useful options include:
+AWS OPTIONS: All other options will be passed through to the AWS request. Useful options include:
   --region: AWS region. Defaults to "eu-central-1"
   --endpoint: specify an endpoint url (e.g. http://localstack:4566)
   --accessKeyId

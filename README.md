@@ -30,7 +30,7 @@ eval $(node aws-secrets-to-env.js \
 
 ## AWS OPTIONS
 
-Other options will be passed through to the AWS request. Useful options include:
+All other options will be passed through to the AWS request. Useful options include:
 
   * --region : AWS region. Defaults to "eu-central-1"
   * --endpoint : specify an endpoint url (e.g. http://localstack:4566)
