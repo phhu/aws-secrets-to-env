@@ -16,7 +16,8 @@ const {
 
 if (help || (!secretid && !ssmpath)){
   console.error(
-    require('fs').readFileSync("./README.md").toString()
+    require('fs').readFileSync("./README.md").toString(),
+    "\nVERSION:", require('./package.json').version,
   )
   process.exit()
 }
