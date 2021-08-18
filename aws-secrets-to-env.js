@@ -33,6 +33,11 @@ eval $(node aws-secrets-to-env.js \
 --useexport \
 ) && node myapp.js
 
+npx -y "@phhu/aws-secrets-to-env" \
+--ssmpath=/myapp/prodconfig \
+--region=eu-central-1 \
+>.env && node myapp.js
+
 SCRIPT OPTIONS
   --ssmpath: AWS Param Store Path to retrieve
   --secretid: AWS Secrets Manager secret ID to retrieve. (This should return JSON key/value pairs)

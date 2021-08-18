@@ -15,6 +15,11 @@ eval $(node aws-secrets-to-env.js \
 --region=eu-central-1 \
 --useexport \
 ) && node myapp.js
+
+npx -y "@phhu/aws-secrets-to-env" \
+--ssmpath=/myapp/prodconfig \
+--region=eu-central-1 \
+>.env && node myapp.js
 ```
 
 * Specify ssmpath and/or secretid to retrieve from AWS Parameter Store and/or AWS Secrets Manager respectively.
