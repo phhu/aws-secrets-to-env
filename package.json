@@ -2,7 +2,7 @@
   "name": "@phhu/aws-secrets-to-env",
   "version": "0.0.5",
   "description": "Node.js CLI script which writes .env files or export commands to stdout based on values held in AWS Parameter Store and/or AWS Secrets Manager",
-  "bin": "node ./aws-secrets-to-env.js",
+  "bin": "./aws-secrets-to-env.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0"
   },
