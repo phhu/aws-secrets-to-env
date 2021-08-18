@@ -1,5 +1,5 @@
 {
-  "name": "aws-secrets-to-env",
+  "name": "@phhu/aws-secrets-to-env",
   "version": "0.0.2",
   "description": "Node.js CLI script which writes .env files or export commands to stdout based on values held in AWS Parameter Store and/or AWS Secrets Manager",
   "main": "awsSecretsToEnv.js",
