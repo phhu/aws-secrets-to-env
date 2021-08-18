@@ -39,6 +39,6 @@ npx -y "@phhu/aws-secrets-to-env" \
 All other options will be passed through to the AWS request. Useful options include:
 
   * --region : AWS region. Defaults to "eu-central-1"
-  * --endpoint : specify an endpoint url (e.g. http://localstack:4566)
+  * --endpoint : specify an endpoint url (e.g. endpoint="http://localstack:4566")
   * --accessKeyId
   * --secretAccessKey
