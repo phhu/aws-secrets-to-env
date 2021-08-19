@@ -9,6 +9,7 @@ const {
   useexport = false,
   secretid = undefined,
   ssmpath = undefined,
+  profile = undefined,
   region = 'eu-central-1',
   _: otherArgs = undefined,
   ...otherOptions
@@ -26,19 +27,25 @@ if (help || (!secretid && !ssmpath)) {
 const debugLog = (...args) => { if (debug) console.error('*', ...args) }
 const stripPath = x => x.replace(/^.*\/(.*?)$/, '$1')
 const escape = x =>
-  typeof x === 'string' ? JSON.stringify(x)
-    : typeof x === 'number' ? x
+  typeof x === 'string'
+    ? JSON.stringify(x)
+    : typeof x === 'number'
+      ? x
       : JSON.stringify(JSON.stringify(x))
 const exportVar = ([key, value]) => `${useexport ? 'export ' : ''}${key}=${escape(value)}`
+const omitSecrets = obj => { const { secretAccessKey, ...rest } = obj; return rest }
 
 const awsConfig = {
   region,
   ...otherOptions
 }
+if (profile) {
+  awsConfig.credentials = new AWS.SharedIniFileCredentials({ profile })
+}
 
 debugLog('secretid', secretid)
 debugLog('ssmpath', ssmpath)
-debugLog('AWS config object', awsConfig)
+debugLog('AWS config object', omitSecrets(awsConfig))
 
 const awsResponseHandler = fn => (err, data) => {
   if (err) {
@@ -52,12 +59,12 @@ const awsResponseHandler = fn => (err, data) => {
 if (secretid) {
   const secretsManagerClient = new AWS.SecretsManager(awsConfig)
   secretsManagerClient.getSecretValue(
-    {SecretId: secretid},
+    { SecretId: secretid },
     awsResponseHandler(data => {
       debugLog('AWS Secrets Manager Response', data)
       try {
         return Object.entries(
-          data?.SecretString && JSON.parse(data.SecretString) || {}
+          (data?.SecretString && JSON.parse(data.SecretString)) || {}
         )
           .map(exportVar)
           .join('\n')

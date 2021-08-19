@@ -51,7 +51,8 @@ export someObj="{\"thing\":1,\"thing2\":2}"
   * --secretid : AWS Secrets Manager secret ID to retrieve. (This should return JSON key/value pairs)
   * --debug : write debugging info to stderr
   * --help : display this message
-  * --useexport : include an "export" command at the start of each line  
+  * --useexport : include an "export" command at the start of each line
+  * --profile : aws profile to use (from ~/.aws; e.g --profile=default). Alternatively you can set env variable AWS_PROFILE (e.g. `export AWS_PROFILE=TEST && node aws-secrets-to-env.js`)
 
 ## AWS OPTIONS
 

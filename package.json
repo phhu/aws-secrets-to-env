@@ -5,7 +5,8 @@
   "bin": "./aws-secrets-to-env.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
-    "tidy": "standard --fix"
+    "tidy": "standard --fix",
+    "publish": "np"
   },
   "repository": {
     "type": "git",
