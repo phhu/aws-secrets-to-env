@@ -1,8 +1,8 @@
-This node.js script writes .env files or export commands to stdout based on values held in Amazon Web Services (AWS) Parameter Store and/or AWS Secrets Manager. Node applications can then be run using environment variables set by it, perhaps using package "dotenv" to retrieve from the .env file.
+This node.js script writes .env files or export commands to stdout based on values held in Amazon Web Services (AWS) [Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) and/or AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/). Node applications can then be run using environment variables set by it, perhaps using package ["dotenv"](https://www.npmjs.com/package/dotenv) to retrieve from the .env file.
 
 * Specify `--ssmpath` and/or `--secretid` to retrieve from AWS Parameter Store and/or AWS Secrets Manager respectively.
 * For the Parameter Store, parameters are returned by path (e.g. parameters with names starting with an arbitrary path such as "/myapp/prodconfig")
-* You can specify `--accessKeyId=[awsAccessKeyId]` and `--secretAccessKey=[awsSecretAccessKey]`; or use an AWS profile with `--profile=someprofile`; otherwise default AWS auth is used.
+* For authentication, you can specify `--accessKeyId=[awsAccessKeyId]` and `--secretAccessKey=[awsSecretAccessKey]`; or use an [AWS profile](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) with `--profile=someprofile`; otherwise default AWS auth is used.
 
 ## SAMPLE USAGE: 
 
@@ -27,7 +27,7 @@ npx -y "@phhu/aws-secrets-to-env" \
 
 ## SAMPLE OUTPUT
 
-As written to `.env` in examples above:
+As written to `.env` in the first example above:
 ```sh
 VAL1fromParamStore="Value of /myapp/prodconfig/VAL1fromParamStore"
 VAL2fromParamStore="encrypted value from parameter store"
@@ -37,7 +37,7 @@ someNumber=1
 someArray="[1,2,3]"
 ```
 
-With `--useexport`, as in example using `eval` above:
+With `--useexport`, as in second example using `eval` above:
 ```sh
 export VAL_FromSecretManager="this is stored in /myapp/prodconfig"
 export someFloat=1.23
