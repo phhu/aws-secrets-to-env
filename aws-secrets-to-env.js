@@ -10,7 +10,6 @@ const {
   secretid = undefined,
   ssmpath = undefined,
   profile = undefined,
-  region = 'eu-central-1',
   _: otherArgs = undefined,
   ...otherOptions
 } = minimist(process.argv.slice(2))
@@ -36,7 +35,6 @@ const exportVar = ([key, value]) => `${useexport ? 'export ' : ''}${key}=${escap
 const omitSecrets = obj => { const { secretAccessKey, ...rest } = obj; return rest }
 
 const awsConfig = {
-  region,
   ...otherOptions
 }
 if (profile) {

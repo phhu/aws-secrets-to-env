@@ -1,8 +1,8 @@
 This node.js script writes .env files or export commands to stdout based on values held in Amazon Web Services (AWS) Parameter Store and/or AWS Secrets Manager. Node applications can then be run using environment variables set by it, perhaps using package "dotenv" to retrieve from the .env file.
 
 * Specify `--ssmpath` and/or `--secretid` to retrieve from AWS Parameter Store and/or AWS Secrets Manager respectively.
-* You can specify `--accessKeyId=[awsAccessKeyId]` and `--secretAccessKey=[awsSecretAccessKey]`; otherwise default AWS auth is used.
 * For the Parameter Store, parameters are returned by path (e.g. parameters with names starting with an arbitrary path such as "/myapp/prodconfig")
+* You can specify `--accessKeyId=[awsAccessKeyId]` and `--secretAccessKey=[awsSecretAccessKey]`; or use an AWS profile with `--profile=someprofile`; otherwise default AWS auth is used.
 
 ## SAMPLE USAGE: 
 
@@ -14,7 +14,6 @@ node aws-secrets-to-env.js \
 >.env && node myapp.js
 
 eval $(node aws-secrets-to-env.js \
---ssmpath=/myapp/prodconfig \
 --secretid=/myapp/prodconfig \
 --region=eu-central-1 \
 --useexport \
@@ -52,13 +51,13 @@ export someObj="{\"thing\":1,\"thing2\":2}"
   * --debug : write debugging info to stderr
   * --help : display this message
   * --useexport : include an "export" command at the start of each line
-  * --profile : aws profile to use (from ~/.aws; e.g --profile=default). Alternatively you can set env variable AWS_PROFILE (e.g. `export AWS_PROFILE=TEST && node aws-secrets-to-env.js`)
+  * --profile : aws profile to use (from ~/.aws; e.g --profile=default). Alternatively you can set env variable AWS_PROFILE (e.g. `export AWS_PROFILE=test && node aws-secrets-to-env.js`)
 
 ## AWS OPTIONS
 
 All other options will be passed through to the AWS request. Useful options include:
 
-  * --region : AWS region. Defaults to "eu-central-1"
-  * --endpoint : specify an endpoint url (e.g. `--endpoint="http://localstack:4566"`)
+  * --region : AWS region. Needs to be specified. e.g. `--region=$AWS_DEFAULT_REGION`, `--region=us-east-1`
+  *  --endpoint : specify an endpoint url (e.g. `--endpoint="http://localstack:4566"`)
   * --accessKeyId
   * --secretAccessKey
