@@ -61,3 +61,5 @@ All other options will be passed through to the AWS request. Useful options incl
   *  --endpoint : specify an endpoint url (e.g. `--endpoint="http://localstack:4566"`)
   * --accessKeyId
   * --secretAccessKey
+
+(see "options hash" under https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SSM.html and https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SecretsManager.html for more details).
