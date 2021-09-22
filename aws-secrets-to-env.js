@@ -54,9 +54,9 @@ const awsResponseHandler = fn => (err, data) => {
 }
 
 // get from secrets manager
+// see https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_Operations.html
 if (secretid) {
-  const secretsManagerClient = new AWS.SecretsManager(awsConfig)
-  secretsManagerClient.getSecretValue(
+  (new AWS.SecretsManager(awsConfig)).getSecretValue(
     { SecretId: secretid },
     awsResponseHandler(data => {
       debugLog('AWS Secrets Manager Response', data)
@@ -79,18 +79,25 @@ if (secretid) {
   )
 }
 
-// get from param store
+// get from param store, recursively (limit MaxResults is 10 per batch)
+// see https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetParametersByPath.html
 if (ssmpath) {
-  const paramStoreClient = new AWS.SSM(awsConfig)
-  paramStoreClient.getParametersByPath({
-    Path: ssmpath,
-    WithDecryption: true
-  },
-  awsResponseHandler(data => {
-    debugLog('AWS Param Store response', data)
-    return (data?.Parameters || [])
-      .map(p => exportVar([stripPath(p.Name), p.Value]))
-      .join('\n')
-  })
-  )
+  const client = new AWS.SSM(awsConfig)
+  const getParamsRecursive = (NextToken) => 
+    client.getParametersByPath(
+      {
+        Path: ssmpath,
+        WithDecryption: true,
+        NextToken
+      },
+      awsResponseHandler(data => {
+        debugLog('AWS Param Store response', data)
+        const ret = (data?.Parameters || [])
+          .map(p => exportVar([stripPath(p.Name), p.Value]))
+          .join('\n')
+        if (data.NextToken){getParamsRecursive(data.NextToken)}
+        return ret
+      })
+    )
+  getParamsRecursive()
 }
