@@ -14,7 +14,7 @@ const {
   ...otherOptions
 } = minimist(process.argv.slice(2))
 
-if (help || (!secretid && !ssmpath)) {
+if (help) {
   const path = require('path')
   console.error(
     require('fs').readFileSync(path.resolve(__dirname,'README.md')).toString(),
@@ -22,7 +22,15 @@ if (help || (!secretid && !ssmpath)) {
   )
   process.exit()
 }
-
+if (!secretid && !ssmpath) {
+  console.error(
+    'Please specify --secretid or --ssmpath.',
+    '--region is required.',
+    '\n--help for more details',
+    '\nVERSION:', require('./package.json').version
+  )
+  process.exit()
+}
 // support funcs
 const debugLog = (...args) => { if (debug) console.error('*', ...args) }
 const stripPath = x => x.replace(/^.*\/(.*?)$/, '$1')
