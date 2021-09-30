@@ -1,6 +1,6 @@
 {
   "name": "@phhu/aws-secrets-to-env",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Node.js CLI script which writes .env files or export commands to stdout based on values held in AWS Parameter Store and/or AWS Secrets Manager",
   "bin": "./aws-secrets-to-env.js",
   "scripts": {
@@ -18,7 +18,9 @@
     "dotenv",
     "env"
   ],
-  "engines" : { "node" : ">=8.0" },
+  "engines": {
+    "node": ">=8.0"
+  },
   "author": "phhu.git@gmail.com",
   "license": "ISC",
   "bugs": {
