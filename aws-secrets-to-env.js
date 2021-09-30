@@ -15,8 +15,9 @@ const {
 } = minimist(process.argv.slice(2))
 
 if (help || (!secretid && !ssmpath)) {
+  const path = require('path')
   console.error(
-    require('fs').readFileSync('./README.md').toString(),
+    require('fs').readFileSync(path.resolve(__dirname,'README.md')).toString(),
     '\nVERSION:', require('./package.json').version
   )
   process.exit()

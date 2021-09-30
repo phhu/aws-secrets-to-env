@@ -13,7 +13,7 @@ node aws-secrets-to-env.js \
 --region=eu-central-1 \
 >.env && node myapp.js
 
-eval $(node aws-secrets-to-env.js \
+eval $(node ./node_modules/@phhu/aws-secrets-to-env/aws-secrets-to-env.js \
 --secretid=/myapp/prodconfig \
 --region=eu-central-1 \
 --useexport \
