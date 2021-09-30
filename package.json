@@ -18,6 +18,7 @@
     "dotenv",
     "env"
   ],
+  "engines" : { "node" : ">=8.0" },
   "author": "phhu.git@gmail.com",
   "license": "ISC",
   "bugs": {

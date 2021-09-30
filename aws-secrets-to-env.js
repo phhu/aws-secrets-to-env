@@ -62,7 +62,7 @@ if (secretid) {
       debugLog('AWS Secrets Manager Response', data)
       try {
         return Object.entries(
-          (data?.SecretString && JSON.parse(data.SecretString)) || {}
+          (data && data.SecretString && JSON.parse(data.SecretString)) || {}
         )
           .map(exportVar)
           .join('\n')
@@ -92,7 +92,7 @@ if (ssmpath) {
       },
       awsResponseHandler(data => {
         debugLog('AWS Param Store response', data)
-        const ret = (data?.Parameters || [])
+        const ret = (data && data.Parameters || [])
           .map(p => exportVar([stripPath(p.Name), p.Value]))
           .join('\n')
         if (data.NextToken){getParamsRecursive(data.NextToken)}
