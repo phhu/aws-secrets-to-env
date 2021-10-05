@@ -15,13 +15,16 @@ node aws-secrets-to-env.js \
 
 eval $(node ./node_modules/@phhu/aws-secrets-to-env/aws-secrets-to-env.js \
 --secretid=/myapp/prodconfig \
---region=eu-central-1 \
+--region=$AWS_DEFAULT_REGION \
+--accessKeyId=someAwsAccessKeyId \
+--secretAccessKey=$SOME_AWS_ACCESS_KEY_ENV_VAR \
 --useexport \
 ) && node myapp.js
 
 npx -y "@phhu/aws-secrets-to-env" \
 --ssmpath=/myapp/prodconfig \
 --region=eu-central-1 \
+--profile=someprofile \
 >.env && node myapp.js
 ```
 
