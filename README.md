@@ -24,7 +24,7 @@ eval $(node ./node_modules/@phhu/aws-secrets-to-env/aws-secrets-to-env.js \
 npx -y "@phhu/aws-secrets-to-env" \
 --ssmpath=/myapp/prodconfig \
 --region=eu-central-1 \
---profile=someprofile \
+--profile=someAwsProfile \
 >.env && node myapp.js
 ```
 
