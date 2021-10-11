@@ -7,6 +7,10 @@ This node.js script writes .env files or export commands to stdout based on valu
 ## SAMPLE USAGE: 
 
 ```sh
+npm install -g "@phhu/aws-secrets-to-env"
+```
+
+```sh
 node aws-secrets-to-env.js \
 --ssmpath=/myapp/prodconfig \
 --secretid=/myapp/prodconfig \
@@ -21,7 +25,7 @@ eval $(node ./node_modules/@phhu/aws-secrets-to-env/aws-secrets-to-env.js \
 --useexport \
 ) && node myapp.js
 
-npx -y "@phhu/aws-secrets-to-env" \
+npx "@phhu/aws-secrets-to-env" \
 --ssmpath=/myapp/prodconfig \
 --region=eu-central-1 \
 --profile=someAwsProfile \
