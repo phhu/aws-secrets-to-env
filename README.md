@@ -11,7 +11,8 @@ npm install -g "@phhu/aws-secrets-to-env"
 ```
 
 ```sh
-node aws-secrets-to-env.js \
+# with global install
+aws-secrets-to-env \
 --ssmpath=/myapp/prodconfig \
 --secretid=/myapp/prodconfig \
 --region=eu-central-1 \
