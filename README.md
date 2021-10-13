@@ -11,13 +11,14 @@ npm install -g "@phhu/aws-secrets-to-env"
 ```
 
 ```sh
-# with global install
+# with global install, writing to .env file
 aws-secrets-to-env \
 --ssmpath=/myapp/prodconfig \
 --secretid=/myapp/prodconfig \
 --region=eu-central-1 \
 >.env && node myapp.js
 
+# using local install, setting environemnt vars using export command
 eval $(node ./node_modules/@phhu/aws-secrets-to-env/aws-secrets-to-env.js \
 --secretid=/myapp/prodconfig \
 --region=$AWS_DEFAULT_REGION \
@@ -26,6 +27,7 @@ eval $(node ./node_modules/@phhu/aws-secrets-to-env/aws-secrets-to-env.js \
 --useexport \
 ) && node myapp.js
 
+# using npx
 npx "@phhu/aws-secrets-to-env" \
 --ssmpath=/myapp/prodconfig \
 --region=eu-central-1 \
