@@ -31,6 +31,7 @@ if (!secretid && !ssmpath) {
   )
   process.exit()
 }
+
 // support funcs
 const debugLog = (...args) => { if (debug) console.error('*', ...args) }
 const stripPath = x => x.replace(/^.*\/(.*?)$/, '$1')

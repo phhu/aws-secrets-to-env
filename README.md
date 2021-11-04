@@ -11,15 +11,15 @@ npm install -g "@phhu/aws-secrets-to-env"
 ```
 
 ```sh
-# with global install, writing to .env file
+# with global npm install, writing to .env file
 aws-secrets-to-env \
 --ssmpath=/myapp/prodconfig \
 --secretid=/myapp/prodconfig \
 --region=eu-central-1 \
 >.env && node myapp.js
 
-# using local install, setting environemnt vars using export command
-eval $(node ./node_modules/@phhu/aws-secrets-to-env/aws-secrets-to-env.js \
+# with global npm install, setting env. vars using export command
+eval $(aws-secrets-to-env \
 --secretid=/myapp/prodconfig \
 --region=$AWS_DEFAULT_REGION \
 --accessKeyId=someAwsAccessKeyId \
@@ -27,7 +27,14 @@ eval $(node ./node_modules/@phhu/aws-secrets-to-env/aws-secrets-to-env.js \
 --useexport \
 ) && node myapp.js
 
-# using npx
+# using local npm install, writing to .env file
+node ./node_modules/@phhu/aws-secrets-to-env/aws-secrets-to-env.js \
+--secretid=/myapp/prodconfig \
+--region=eu-central-1 \
+--profile=someAwsProfile \
+>.env && node myapp.js
+
+# using npx, writing to .env file
 npx "@phhu/aws-secrets-to-env" \
 --ssmpath=/myapp/prodconfig \
 --region=eu-central-1 \
@@ -47,7 +54,7 @@ someNumber=1
 someArray="[1,2,3]"
 ```
 
-With `--useexport`, as in second example using `eval` above:
+With `--useexport`, as in second example, using `eval` above:
 ```sh
 export VAL_FromSecretManager="this is stored in /myapp/prodconfig"
 export someFloat=1.23
